@@ -1,4 +1,4 @@
-FROM golang:1.13.8 AS build
+FROM golang:1.19 AS build
 ENV TOKEN=0 \
     PORT=2112 \
     DECONZ_HOST=localhost \
@@ -6,14 +6,14 @@ ENV TOKEN=0 \
 WORKDIR /src/
 ADD . .
 ENV USER=appuser
-ENV UID=10001 
-RUN adduser \    
-    --disabled-password \    
-    --gecos "" \    
-    --home "/nonexistent" \    
-    --shell "/sbin/nologin" \    
-    --no-create-home \    
-    --uid "${UID}" \    
+ENV UID=10001
+RUN adduser \
+    --disabled-password \
+    --gecos "" \
+    --home "/nonexistent" \
+    --shell "/sbin/nologin" \
+    --no-create-home \
+    --uid "${UID}" \
     "${USER}"
 
 RUN go mod download
